@@ -60,13 +60,13 @@
         },
 
         methods: {
-            dismiss() {
-                this.show = false;
-                if (typeof this.onClose === 'function') {
-                    this.onClose();
+            isEmpty(){
+                // hide notification if its empty
+                if (!this.self_title) {
+                    this.show = false;
                 }
             },
-
+            
             collectData(data){
                 this.self_title = data.title
                 this.self_body = data.body
@@ -76,17 +76,15 @@
                 this.show = true;
 
                 setTimeout(()=>{
-                    this.show = false;
-                    if (typeof this.onClose === 'function') {
-                        this.onClose();
-                    }
+                    this.dismiss();
                 }, this.timer);
             },
-
-            isEmpty(){
-                // hide notification if its empty
-                if (!this.self_title) {
-                    this.show = false;
+            
+            dismiss() {
+                // hide notification when "x" is clicked
+                this.show = false;
+                if (typeof this.onClose === 'function') {
+                    this.onClose();
                 }
             },
         },
