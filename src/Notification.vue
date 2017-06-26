@@ -37,7 +37,10 @@
             title: {type: String},
             body: {type: String},
             type: {default: 'info'},
-            duration: {required: false}
+            duration: {
+                default: '',
+                required: false
+            }
         },
 
         data() {
@@ -66,7 +69,7 @@
                     this.show = false;
                 }
             },
-            
+
             collectData(data){
                 this.self_title = data.title
                 this.self_body = data.body
@@ -75,11 +78,13 @@
                 this.onClose = data.onClose
                 this.show = true;
 
-                setTimeout(()=>{
-                    this.dismiss();
-                }, this.timer);
+                if (this.self_duration) {
+                    setTimeout(()=>{
+                        this.dismiss();
+                    }, this.timer);
+                }
             },
-            
+
             dismiss() {
                 // hide notification when "x" is clicked
                 this.show = false;
