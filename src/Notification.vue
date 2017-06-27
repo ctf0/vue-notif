@@ -105,28 +105,23 @@
                 })
             },
 
+            IsVisible(index){
+                const dur = this.notif_group[index].duration;
+
+                if (dur !== undefined) {
+                    setTimeout(()=>{
+                        this.closeNotif(index);
+                    }, dur * 1000);
+                }
+
+                return this.notif_group[index].show;
+            },
+
             closeNotif(index) {
                 if (this.notif_group[index].onClose !== undefined && typeof this.notif_group[index].onClose === 'function') {
                     this.notif_group[index].onClose();
                 }
 
-                this.dismiss(index);
-            },
-
-            IsVisible(index){
-                const item = this.notif_group[index];
-                const dur = item.duration;
-
-                if (dur !== undefined) {
-                    setTimeout(()=>{
-                        this.dismiss(index);
-                    }, dur * 1000);
-                }
-
-                return item.show;
-            },
-
-            dismiss(index){
                 this.notif_group[index].show = false;
                 this.$delete(this.notif_group,index);
             },
