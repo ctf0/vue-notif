@@ -59,9 +59,9 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
 **3-** add the css
 ```css
 .notif-container {
-    padding: 2rem 0;
+    padding: 0 0 4rem;
     position: fixed;
-    top: 0;
+    top: 4rem;
     right: 1rem;
     bottom: 0;
     z-index: 100;

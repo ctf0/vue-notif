@@ -1,11 +1,28 @@
 <template>
-    <transition name="slide-fade">
-        <div class="notification is-stacked has-shadow" :class="classObj" v-if="show">
-            <h4 class="title is-4">{{ self_title }}</h4>
-            <button class="delete" @click="dismiss"></button>
-            <p>{{ self_body }}</p>
-        </div>
-    </transition>
+    <div>
+        <!-- single -->
+        <transition name="slide-fade" v-if="self_show">
+            <ul>
+                <li :class="classObj(self_type)">
+                    <h4 class="title is-4">{{ self_title }}</h4>
+                    <button class="delete" @click="self_show = false"></button>
+                    <p>{{ self_body }}</p>
+                </li>
+            </ul>
+        </transition>
+
+        <!-- events -->
+        <transition-group name="slide-fade" tag="ul" v-if="!self_title">
+            <li v-for="(one,index) in notif_group"
+                :key="one"
+                :class="classObj(one.type)"
+                v-if="IsVisible(index)">
+                <h4 class="title is-4">{{ one.title }}</h4>
+                <button class="delete" @click="closeNotif(index)"></button>
+                <p>{{ one.body }}</p>
+            </li>
+        </transition-group>
+    </div>
 </template>
 
 <style scoped>
@@ -21,10 +38,11 @@
     }
 
     /*notiifcation card*/
-    .is-stacked {
+    li {
         width: 330px;
-        float: right;
-        clear: right;
+    }
+    .notification {
+        margin-bottom: 10px;
     }
     .has-shadow {
         box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 0 6px rgba(0,0,0,0.04);
@@ -41,25 +59,22 @@
             title: {type: String},
             body: {type: String},
             type: {default: 'info'},
-            duration: {
-                default: '',
-                required: false
-            }
+            duration: {required: false}
         },
 
         data() {
             return {
-                show: true,
-                onClose: null,
+                notif_group: [],
                 self_title: this.title,
                 self_body: this.body,
                 self_type: this.type,
                 self_duration: this.duration,
+                self_show: false
             };
         },
 
         created() {
-            this.isEmpty();
+            this.checkProp();
 
             EventHub.listen('showNotif', (data)=>{
                 this.collectData(data)
@@ -67,43 +82,57 @@
         },
 
         methods: {
-            isEmpty(){
-                // hide notification if its empty
-                if (!this.self_title) {
-                    this.show = false;
+            checkProp(){
+                if (this.self_title) {
+                    this.self_show = true;
+                }
+
+                if (this.self_duration !== undefined) {
+                    setTimeout(()=>{
+                        this.self_show = false;
+                    }, this.self_duration * 1000);
                 }
             },
 
             collectData(data){
-                this.self_title = data.title
-                this.self_body = data.body
-                this.self_type = data.type
-                this.self_duration = data.duration
-                this.onClose = data.onClose
-                this.show = true;
+                this.notif_group.push({
+                    title: data.title,
+                    body: data.body,
+                    type: data.type,
+                    duration: data.duration,
+                    onClose: data.onClose,
+                    show: true
+                })
+            },
 
-                if (this.self_duration) {
+            closeNotif(index) {
+                if (this.notif_group[index].onClose !== undefined && typeof this.notif_group[index].onClose === 'function') {
+                    this.notif_group[index].onClose();
+                }
+
+                this.dismiss(index);
+            },
+
+            IsVisible(index){
+                const item = this.notif_group[index];
+                const dur = item.duration;
+
+                if (dur !== undefined) {
                     setTimeout(()=>{
-                        this.dismiss();
-                    }, this.timer);
+                        this.dismiss(index);
+                    }, dur * 1000);
                 }
+
+                return item.show;
             },
 
-            dismiss() {
-                // hide notification when "x" is clicked
-                this.show = false;
-                if (typeof this.onClose === 'function') {
-                    this.onClose();
-                }
+            dismiss(index){
+                this.notif_group[index].show = false;
+                this.$delete(this.notif_group,index);
             },
-        },
 
-        computed: {
-            timer() {
-                return this.self_duration * 1000;
-            },
-            classObj(){
-                return `is-${this.self_type}`
+            classObj(type){
+                return `notification has-shadow is-${type}`
             }
         }
     }
