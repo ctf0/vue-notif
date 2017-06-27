@@ -118,12 +118,11 @@
             },
 
             closeNotif(index) {
-                if (this.notif_group[index].onClose !== undefined && typeof this.notif_group[index].onClose === 'function') {
+                this.notif_group[index].show = false;
+
+                if (typeof(this.notif_group[index].onClose) != 'undefined' && typeof this.notif_group[index].onClose === 'function') {
                     this.notif_group[index].onClose();
                 }
-
-                this.notif_group[index].show = false;
-                this.$delete(this.notif_group,index);
             },
 
             classObj(type){
