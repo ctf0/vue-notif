@@ -4,9 +4,9 @@
         <transition name="slide-fade" v-if="self_show">
             <ul>
                 <li :class="classObj(self_type)">
-                    <h4 class="title is-4">{{ self_title }}</h4>
+                    <p class="title">{{ self_title }}</p>
                     <button class="delete" @click="self_show = false"></button>
-                    <p>{{ self_body }}</p>
+                    <p class="subtitle">{{ self_body }}</p>
                 </li>
             </ul>
         </transition>
@@ -17,9 +17,9 @@
                 :key="one"
                 :class="classObj(one.type)"
                 v-if="IsVisible(index)">
-                <h4 class="title is-4">{{ one.title }}</h4>
+                <p class="title">{{ one.title }}</p>
                 <button class="delete" @click="closeNotif(index)"></button>
-                <p>{{ one.body }}</p>
+                <p class="subtitle">{{ one.body }}</p>
             </li>
         </transition-group>
     </div>
@@ -38,9 +38,6 @@
     }
 
     /*notiifcation card*/
-    li {
-        width: 330px;
-    }
     .notification {
         margin-bottom: 10px;
     }
@@ -48,6 +45,9 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 0 6px rgba(0,0,0,0.04);
     }
 
+    li {
+        width: 330px;
+    }
     p {
         word-break: break-all;
     }
