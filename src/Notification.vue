@@ -48,9 +48,6 @@
     li {
         width: 330px;
     }
-    p {
-        word-break: break-all;
-    }
 </style>
 
 <script>
