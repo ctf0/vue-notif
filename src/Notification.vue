@@ -12,6 +12,10 @@
         </transition>
 
         <!-- events -->
+        <span id="close_all" class="tag is-dark is-medium" v-if="notif_group.length > 1" @click="closeAll()">
+          Close All
+          <button class="delete"></button>
+        </span><link rel="canonical" href="">
         <transition-group name="slide-fade" tag="ul" v-if="!self_title">
             <li v-for="(one,index) in notif_group"
                 :key="one"
@@ -44,7 +48,14 @@
     .has-shadow {
         box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 0 6px rgba(0,0,0,0.04);
     }
-
+    #close_all {
+        background-color: rgba(54, 54, 54, 0.9);
+        cursor: pointer;
+        position: fixed;
+        z-index: 1;
+        top: 1rem;
+        right: 1rem;
+    }
     li {
         width: 330px;
     }
@@ -79,6 +90,13 @@
         },
 
         methods: {
+            closeAll(){
+                this.notif_group.map(function(item) {
+                    return item.show = false;
+                })
+                this.notif_group = []
+            },
+
             checkProp(){
                 if (this.self_title) {
                     this.self_show = true;
