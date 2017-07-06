@@ -12,7 +12,9 @@
         </transition>
 
         <!-- events -->
-        <span id="close_all" class="tag is-dark is-medium" v-if="notif_group.length > 1" @click="closeAll()">
+        <span id="close_all" class="tag is-dark is-medium"
+            v-if="notif_group.length && notif_group[0].show"
+            @click="closeAll()">
           Close All
           <button class="delete"></button>
         </span><link rel="canonical" href="">
@@ -92,9 +94,9 @@
         methods: {
             closeAll(){
                 this.notif_group.map(function(item) {
-                    return item.show = false;
+                    item.show = false;
+                    item.duration = null;
                 })
-                this.notif_group = []
             },
 
             checkProp(){
