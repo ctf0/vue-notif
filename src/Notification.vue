@@ -13,11 +13,12 @@
 
         <!-- events -->
         <span id="close_all" class="tag is-dark is-medium"
-            v-if="notif_group.length && notif_group[0].show"
+            v-if="notif_group.length && notif_group[notif_group.length - 1].show"
             @click="closeAll()">
           Close All
           <button class="delete"></button>
         </span><link rel="canonical" href="">
+        
         <transition-group name="slide-fade" tag="ul" v-if="!self_title">
             <li v-for="(one,index) in notif_group"
                 :key="one"
