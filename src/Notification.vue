@@ -12,13 +12,11 @@
         </transition>
 
         <!-- events -->
-        <span id="close_all" class="tag is-dark is-medium"
-            v-if="notif_group.length && notif_group[notif_group.length - 1].show"
-            @click="closeAll()">
-          Close All
-          <button class="delete"></button>
-        </span><link rel="canonical" href="">
-        
+        <span id="close_all" class="tag is-dark is-medium" v-if="checkForGroup()" @click="closeAll()">
+            Close All
+            <button class="delete"></button>
+        </span>
+
         <transition-group name="slide-fade" tag="ul" v-if="!self_title">
             <li v-for="(one,index) in notif_group"
                 :key="one"
@@ -99,7 +97,9 @@
                     item.duration = null;
                 })
             },
-
+            checkForGroup(){
+                return this.notif_group.length > 1 && this.notif_group[this.notif_group.length - 1].show
+            },
             checkProp(){
                 if (this.self_title) {
                     this.self_show = true;
