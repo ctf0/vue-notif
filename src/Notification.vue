@@ -2,53 +2,103 @@
     <div>
         <!-- single -->
         <transition name="slide-fade" v-if="self_show">
-            <ul>
-                <li :class="classObj(self_type)">
-                    <p class="title">{{ self_title }}</p>
-                    <button class="delete" @click="self_show = false"></button>
-                    <p class="subtitle">{{ self_body }}</p>
-                </li>
-            </ul>
+            <div :class="classObj(self_type)" class="item">
+
+                <button class="delete" @click="self_show = false"></button>
+                <div class="media">
+                    <div class="media-left" v-if="self_icon">
+                        <figure class="icon is-large">
+                            <i class="material-icons">{{ getIcon(self_type) }}</i>
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <h4 class="title">
+                            <strong>{{ self_title }}</strong>
+                        </h4>
+                        <p class="subtitle">{{ self_body }}</p>
+                    </div>
+                </div>
+
+            </div>
         </transition>
 
         <!-- events -->
-        <span id="close_all" class="tag is-dark is-medium" v-if="checkForGroup()" @click="closeAll()">
-            Close All
-            <button class="delete"></button>
-        </span>
+        <template v-if="!self_title">
+            <span id="close_all" class="tag is-dark is-medium"
+                v-if="checkForGroup()" @click="closeAll()">
+                Close All
+                <button class="delete"></button>
+            </span>
 
-        <transition-group name="slide-fade" tag="ul" v-if="!self_title">
-            <li v-for="(one,index) in notif_group"
-                :key="one"
-                :class="classObj(one.type)"
-                v-if="IsVisible(index)">
-                <p class="title">{{ one.title }}</p>
-                <button class="delete" @click="closeNotif(index)"></button>
-                <p class="subtitle">{{ one.body }}</p>
-            </li>
-        </transition-group>
+            <transition-group name="slide-fade" tag="ul">
+                <li v-for="(one,index) in notif_group" :key="one"
+                    class="item" :class="classObj(one.type)"
+                    v-if="IsVisible(index)">
+
+                    <button class="delete" @click="closeNotif(index)"></button>
+                    <div class="media">
+                        <div class="media-left" v-if="one.icon">
+                            <figure class="icon is-large">
+                                <i class="material-icons">{{ getIcon(one.type) }}</i>
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <h4 class="title">
+                                <strong>{{ one.title }}</strong>
+                            </h4>
+                            <p class="subtitle">{{ one.body }}</p>
+                        </div>
+                    </div>
+
+                </li>
+            </transition-group>
+        </template>
     </div>
 </template>
 
 <style scoped>
+    @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
     /*animation*/
     .slide-fade-enter-active,
     .slide-fade-leave-active {
         transition: all 0.3s ease;
     }
     .slide-fade-enter,
-    .slide-fade-leave-active {
+    .slide-fade-leave-to {
         opacity: 0;
         transform: translateX(10px);
     }
 
     /*notiifcation card*/
-    .notification {
-        margin-bottom: 10px;
+    .item {
+        width: 330px;
     }
+    .material-icons {
+        font-size: 3rem;
+    }
+    .media-left {
+        align-self: center;
+        position: relative;
+        margin-right: 1.25rem;
+    }
+    .media-left:after {
+        content: "";
+        background: white;
+        width: 1px;
+        position: absolute;
+        top: -25%;
+        right: -0.5rem;
+        bottom: -25%;
+    }
+
     .has-shadow {
         box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 0 6px rgba(0,0,0,0.04);
     }
+    .notification {
+        margin-bottom: 10px;
+    }
+
     #close_all {
         background-color: rgba(54, 54, 54, 0.9);
         cursor: pointer;
@@ -57,18 +107,21 @@
         top: 1rem;
         right: 1rem;
     }
-    li {
-        width: 330px;
+    #close_all:hover{
+        background-color: rgb(54, 54, 54);
     }
 </style>
 
 <script>
     export default {
         props: {
-            title: {type: String},
-            body: {type: String},
+            title: '',
+            body: '',
+            icon: {
+                default: true
+            },
             type: {default: 'info'},
-            duration: {required: false}
+            duration: null
         },
 
         data() {
@@ -77,6 +130,7 @@
                 self_title: this.title,
                 self_body: this.body,
                 self_type: this.type,
+                self_icon: Boolean(this.icon),
                 self_duration: this.duration,
                 self_show: false
             };
@@ -91,14 +145,14 @@
         },
 
         methods: {
+            checkForGroup(){
+                return this.notif_group.length > 1 && this.notif_group[this.notif_group.length - 1].show
+            },
             closeAll(){
                 this.notif_group.map(function(item) {
                     item.show = false;
                     item.duration = null;
                 })
-            },
-            checkForGroup(){
-                return this.notif_group.length > 1 && this.notif_group[this.notif_group.length - 1].show
             },
             checkProp(){
                 if (this.self_title) {
@@ -111,20 +165,19 @@
                     }, this.self_duration * 1000);
                 }
             },
-
             collectData(data){
                 this.notif_group.push({
                     title: data.title,
                     body: data.body,
                     type: data.type,
+                    icon: data.icon == null ? true : false,
                     duration: data.duration,
                     onClose: data.onClose,
                     show: true
                 })
             },
-
             IsVisible(index){
-                const dur = this.notif_group[index].duration;
+                let dur = this.notif_group[index].duration;
 
                 if (dur !== undefined) {
                     setTimeout(()=>{
@@ -134,7 +187,6 @@
 
                 return this.notif_group[index].show;
             },
-
             closeNotif(index) {
                 this.notif_group[index].show = false;
 
@@ -142,9 +194,29 @@
                     this.notif_group[index].onClose();
                 }
             },
-
             classObj(type){
                 return `notification has-shadow is-${type}`
+            },
+            getIcon(type) {
+                switch(type) {
+                    case 'primary':
+                        return 'check_circle'
+                        break;
+                    case 'success':
+                        return 'check_circle'
+                        break;
+                    case 'info':
+                        return 'live_help'
+                        break;
+                    case 'warning':
+                        return 'power_settings_new'
+                        break;
+                    case 'danger':
+                        return 'add_alert'
+                        break;
+                    default:
+                        return 'error'
+                }
             }
         }
     }

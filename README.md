@@ -24,6 +24,7 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
     <div class="notif-container">
         @if (session('status'))
             <my-notification
+                icon="false"
                 title="title"
                 body="body"
                 type="success/error/primary/warning"
@@ -41,6 +42,7 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
         body: 'body',
         type: 'success',
         duration: 1,
+        icon: false,
         onClose(){
             // what happen when notification close button is clicked
         }
@@ -53,13 +55,14 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
     </div>
     ```
 
-> - type > default: info
-> - duration > if not present, card will remain visible
+> - type > `default: info`
+> - duration > `default: null` if not present, card will remain visible
+> - icon > `default: true`
 
 **3-** add the css
 ```css
 .notif-container {
-    padding: 0 0 4rem;
+    padding-bottom: 4rem;
     position: fixed;
     top: 4rem;
     right: 1rem;
