@@ -97,6 +97,7 @@
     }
     .notification {
         margin-bottom: 10px;
+        padding: 1.25rem;
     }
 
     #close_all {
@@ -146,7 +147,8 @@
 
         methods: {
             checkForGroup(){
-                return this.notif_group.length > 1 && this.notif_group[this.notif_group.length - 1].show
+                return this.notif_group.length > 1 && 
+                    this.notif_group.filter((item) => item.show == true).length > 1
             },
             closeAll(){
                 this.notif_group.map(function(item) {
@@ -200,7 +202,7 @@
             getIcon(type) {
                 switch(type) {
                     case 'primary':
-                        return 'check_circle'
+                        return 'track_changes'
                         break;
                     case 'success':
                         return 'check_circle'
