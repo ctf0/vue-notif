@@ -31,7 +31,7 @@
             </span>
 
             <transition-group name="slide-fade" tag="ul">
-                <li v-for="(one,index) in notif_group" :key="one"
+                <li v-for="(one,index) in notif_group" :key="index"
                     class="item" :class="classObj(one.type)"
                     v-if="IsVisible(index)">
 
