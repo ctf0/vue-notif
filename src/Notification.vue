@@ -82,15 +82,6 @@
         position: relative;
         margin-right: 1.25rem;
     }
-    .media-left:after {
-        content: "";
-        background: white;
-        width: 1px;
-        position: absolute;
-        top: -25%;
-        right: -0.5rem;
-        bottom: -25%;
-    }
 
     .has-shadow {
         box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 0 6px rgba(0,0,0,0.04);
@@ -147,7 +138,7 @@
 
         methods: {
             checkForGroup(){
-                return this.notif_group.length > 1 && 
+                return this.notif_group.length > 1 &&
                     this.notif_group.filter((item) => item.show == true).length > 1
             },
             closeAll(){
