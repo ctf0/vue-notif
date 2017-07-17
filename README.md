@@ -64,6 +64,8 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
 .notif-container {
     padding-bottom: 4rem;
     position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
     top: 4rem;
     right: 1rem;
     bottom: 0;
