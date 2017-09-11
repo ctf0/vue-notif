@@ -44,7 +44,7 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
         duration: 1,
         icon: false,
         onClose(){
-            // what happen when notification close button is clicked
+            // what happen when notification is closed
         }
     });
     ```
