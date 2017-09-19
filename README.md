@@ -60,6 +60,7 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
 > - icon > `default: true`
 
 **3-** add the css
+
 ```css
 .notif-container {
     padding: 0 0 4rem;
@@ -74,4 +75,4 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
 
 # ToDo
 
-* [ ] Turn into Package.
+* Turn into Package.
