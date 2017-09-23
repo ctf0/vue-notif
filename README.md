@@ -1,4 +1,4 @@
-# Requirement
+# Dependency
 
 [vuemit](https://github.com/gocanto/vuemit)
 
@@ -6,16 +6,30 @@
 
 **1-** register the component
 
-- we use ***Bulma*** for styling the notification cards, but you can change it by editing the component file.
+- we use ***Bulma*** for styling the notification cards.
 
 ```js
-window.Vue = require('vue');
+window.Vue = require('vue')
 window.EventHub = require('vuemit')
 
-Vue.component('MyNotification', require('./path/to/Notification.vue'))
+Vue.component('MyNotification', require('vue-notif'))
 ```
 
-**2-** you can call it either
+**2-** add the css
+
+```css
+.notif-container {
+    padding: 0 0 4rem;
+    position: fixed;
+    top: 4rem;
+    right: 1rem;
+    bottom: 0;
+    z-index: 100;
+    overflow: scroll;
+}
+```
+
+**3-** you can call it either
 
 - from html
 
@@ -58,21 +72,3 @@ Vue.component('MyNotification', require('./path/to/Notification.vue'))
 > - type > `default: info`
 > - duration > `default: null` if not present, card will remain visible
 > - icon > `default: true`
-
-**3-** add the css
-
-```css
-.notif-container {
-    padding: 0 0 4rem;
-    position: fixed;
-    top: 4rem;
-    right: 1rem;
-    bottom: 0;
-    z-index: 100;
-    overflow: scroll;
-}
-```
-
-# ToDo
-
-* Turn into Package.
