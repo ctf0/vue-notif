@@ -1,6 +1,8 @@
-# Dependency
+# Installation
 
-[vuemit](https://github.com/gocanto/vuemit)
+```bash
+npm install vue vuemit --save
+```
 
 # Usage
 
@@ -15,21 +17,7 @@ window.EventHub = require('vuemit')
 Vue.component('MyNotification', require('vue-notif'))
 ```
 
-**2-** add the css
-
-```css
-.notif-container {
-    padding: 0 0 4rem;
-    position: fixed;
-    top: 4rem;
-    right: 1rem;
-    bottom: 0;
-    z-index: 100;
-    overflow: scroll;
-}
-```
-
-**3-** you can call it either
+**2-** now call it either
 
 - from html
 

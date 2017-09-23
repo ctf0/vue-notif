@@ -56,6 +56,18 @@
     </div>
 </template>
 
+<style>
+    .notif-container {
+        padding: 0 0 4rem;
+        position: fixed;
+        top: 4rem;
+        right: 1rem;
+        bottom: 0;
+        z-index: 100;
+        overflow: scroll;
+    }
+</style>
+
 <style scoped>
     @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
