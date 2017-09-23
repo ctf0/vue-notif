@@ -1,7 +1,7 @@
 # Installation
 
 ```bash
-npm install vue vuemit --save
+npm install vue vuemit vue-notif --save
 ```
 
 # Usage
