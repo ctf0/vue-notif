@@ -13,6 +13,7 @@
     "keywords": [
         "vue",
         "notification",
+        "component",
         "bulma"
     ],
     "dependencies": {

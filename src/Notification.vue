@@ -58,13 +58,11 @@
 
 <style>
     .notif-container {
-        padding: 0 0 4rem;
+        padding: 0;
         position: fixed;
         top: 4rem;
         right: 1rem;
-        bottom: 0;
-        z-index: 100;
-        overflow: scroll;
+        z-index: 10000;
     }
 </style>
 
