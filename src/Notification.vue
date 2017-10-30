@@ -12,10 +12,10 @@
                         </figure>
                     </div>
                     <div class="media-content">
-                        <h1 class="title">
+                        <h4 class="title">
                             <strong>{{ self_title }}</strong>
-                        </h1>
-                        <h3 class="subtitle">{{ self_body }}</h3>
+                        </h4>
+                        <p class="subtitle">{{ self_body }}</p>
                     </div>
                 </div>
 
@@ -43,10 +43,10 @@
                             </figure>
                         </div>
                         <div class="media-content">
-                            <h1 class="title">
+                            <h4 class="title">
                                 <strong>{{ one.title }}</strong>
-                            </h1>
-                            <h3 class="subtitle">{{ one.body }}</h3>
+                            </h4>
+                            <p class="subtitle">{{ one.body }}</p>
                         </div>
                     </div>
 
