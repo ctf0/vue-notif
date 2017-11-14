@@ -101,6 +101,11 @@
         margin-bottom: 10px;
     }
 
+    .notification .delete {
+        right: 0.5rem;
+        top: 0.5rem;
+    }
+
     #close_all {
         background-color: rgba(54, 54, 54, 0.9);
         cursor: pointer;
@@ -108,9 +113,15 @@
         z-index: 1;
         top: 1rem;
         right: 1rem;
+        border-radius: 100vw;
     }
     #close_all:hover{
         background-color: rgb(54, 54, 54);
+    }
+
+    #close_all .delete {
+        margin-left: 0.25rem;
+        margin-right: -0.375rem;
     }
 </style>
 
