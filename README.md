@@ -1,10 +1,14 @@
-# Installation
+# Notification Component
+
+[![npm](https://img.shields.io/npm/v/vue-notif.svg?style=for-the-badge)](https://www.npmjs.com/package/vue-notif) [![npm](https://img.shields.io/npm/dt/vue-notif.svg?style=for-the-badge)](https://www.npmjs.com/package/vue-notif)
+
+## Installation
 
 ```bash
-npm install vue vuemit vue-notif --save
+npm install vuemit vue-notif --save
 ```
 
-# Usage
+## Usage
 
 **1-** register the component
 

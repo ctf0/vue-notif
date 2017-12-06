@@ -4,7 +4,7 @@
         <transition name="slide-fade" v-if="self_show">
             <div :class="classObj(self_type)" class="item">
 
-                <button class="delete" @click="self_show = false"></button>
+                <button class="delete" @click="self_show = false"/>
                 <div class="media">
                     <div class="media-left" v-if="self_icon">
                         <figure class="icon is-large">
@@ -24,18 +24,21 @@
 
         <!-- events -->
         <template v-if="!self_title">
-            <span id="close_all" class="tag is-dark is-medium"
-                v-if="checkForGroup()" @click="closeAll()">
+            <span id="close_all"
+                  class="tag is-rounded is-dark is-medium"
+                  v-if="checkForGroup()" @click="closeAll()">
                 Close All
-                <button class="delete"></button>
+                <button class="delete"/>
             </span>
 
             <transition-group name="slide-fade" tag="ul">
-                <li v-for="(one,index) in notif_group" :key="index"
-                    class="item" :class="classObj(one.type)"
+                <li v-for="(one,index) in notif_group"
+                    :key="index"
+                    class="item"
+                    :class="classObj(one.type)"
                     v-if="IsVisible(index)">
 
-                    <button class="delete" @click="closeNotif(index)"></button>
+                    <button class="delete" @click="closeNotif(index)"/>
                     <div class="media">
                         <div class="media-left" v-if="one.icon">
                             <figure class="icon is-large">
@@ -113,8 +116,8 @@
         z-index: 1;
         top: 1rem;
         right: 1rem;
-        border-radius: 100vw;
     }
+
     #close_all:hover{
         background-color: rgb(54, 54, 54);
     }
@@ -128,13 +131,11 @@
 <script>
 export default {
     props: {
-        title: '',
-        body: '',
-        icon: {
-            default: true
-        },
+        title: {default: ''},
+        body: {default: ''},
+        icon: {default: true},
         type: {default: 'info'},
-        duration: null
+        duration: {default: null}
     },
 
     data() {
