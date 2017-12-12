@@ -5,10 +5,10 @@
     "name": "vue-notif",
     "main": "src/Notification.vue",
     "description": "vue v2 notification component which can be used either through js or html",
-    "homepage": "https://github.com/ctf0/Notification-Component",
+    "homepage": "https://github.com/ctf0/vue-notif",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ctf0/Notification-Component.git"
+        "url": "https://github.com/ctf0/vue-notif.git"
     },
     "keywords": [
         "vue",
