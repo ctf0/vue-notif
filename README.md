@@ -1,4 +1,4 @@
-# Notification Component
+# Vue Notif
 
 [![npm](https://img.shields.io/npm/v/vue-notif.svg?style=for-the-badge)](https://www.npmjs.com/package/vue-notif) [![npm](https://img.shields.io/npm/dt/vue-notif.svg?style=for-the-badge)](https://www.npmjs.com/package/vue-notif)
 
