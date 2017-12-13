@@ -174,7 +174,7 @@ export default {
                 this.self_show = true
             }
 
-            if (this.self_duration !== undefined) {
+            if (this.self_duration != (undefined || null)) {
                 setTimeout(() => {
                     this.self_show = false
                 }, this.self_duration * 1000)
@@ -194,7 +194,7 @@ export default {
         IsVisible(index) {
             let dur = this.notif_group[index].duration
 
-            if (dur != undefined || dur != null) {
+            if (dur != (undefined || null)) {
                 setTimeout(() => {
                     this.closeNotif(index)
                 }, dur * 1000)

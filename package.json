@@ -10,6 +10,10 @@
         "type": "git",
         "url": "https://github.com/ctf0/vue-notif.git"
     },
+    "dependencies": {
+        "vuemit": "^1.0.0",
+        "vue": "^2.0.0"
+    },
     "keywords": [
         "vue",
         "notification",
