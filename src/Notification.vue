@@ -2,8 +2,7 @@
     <div>
         <!-- single -->
         <transition name="slide-fade" v-if="self_show">
-            <div :class="classObj(self_type)" class="item">
-
+            <div :class="classObj(self_type)" class="item" @click="self_show = false">
                 <button class="delete" @click="self_show = false"/>
                 <div class="media">
                     <div class="media-left" v-if="self_icon">
@@ -18,7 +17,6 @@
                         <p class="subtitle">{{ self_body }}</p>
                     </div>
                 </div>
-
             </div>
         </transition>
 
@@ -36,7 +34,8 @@
                     :key="index"
                     class="item"
                     :class="classObj(one.type)"
-                    v-if="IsVisible(index)">
+                    v-if="IsVisible(index)"
+                    @click="closeNotif(index)">
 
                     <button class="delete" @click="closeNotif(index)"/>
                     <div class="media">
@@ -74,11 +73,8 @@
         font-family: 'Material Icons';
         font-style: normal;
         font-weight: 400;
-        src: url(./fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
         src: local('Material Icons'),
         local('MaterialIcons-Regular'),
-        url(./fonts/MaterialIcons-Regular.woff2) format('woff2'),
-        url(./fonts/MaterialIcons-Regular.woff) format('woff'),
         url(./fonts/MaterialIcons-Regular.ttf) format('truetype');
     }
 
