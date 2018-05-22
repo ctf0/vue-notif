@@ -1,13 +1,13 @@
 <template>
     <div>
         <!-- single -->
-        <transition name="slide-fade" v-if="self_show">
+        <transition v-if="self_show" name="slide-fade">
             <div :class="classObj(self_type)" class="item" @click="self_show = false">
                 <button class="delete" @click="self_show = false"/>
                 <div class="media">
-                    <div class="media-left" v-if="self_icon">
+                    <div v-if="self_icon" class="media-left">
                         <figure class="icon is-large">
-                            <i class="material-icons">{{ getIcon(self_type) }}</i>
+                            <img :src="getIcon(self_type)">
                         </figure>
                     </div>
                     <div class="media-content">
@@ -22,26 +22,26 @@
 
         <!-- events -->
         <template v-if="!self_title">
-            <span id="close_all"
-                  class="tag is-rounded is-dark is-medium"
-                  v-if="checkForGroup()" @click="closeAll()">
+            <span v-if="checkForGroup()"
+                  id="close_all"
+                  class="tag is-rounded is-dark is-medium" @click="closeAll()">
                 Close All
                 <button class="delete"/>
             </span>
 
             <transition-group name="slide-fade" tag="ul">
                 <li v-for="(one,index) in notif_group"
-                    :key="index"
-                    class="item"
-                    :class="classObj(one.type)"
                     v-if="IsVisible(index)"
+                    :key="index"
+                    :class="classObj(one.type)"
+                    class="item"
                     @click="closeNotif(index)">
 
                     <button class="delete" @click="closeNotif(index)"/>
                     <div class="media">
-                        <div class="media-left" v-if="one.icon">
+                        <div v-if="one.icon" class="media-left">
                             <figure class="icon is-large">
-                                <i class="material-icons">{{ getIcon(one.type) }}</i>
+                                <img :src="getIcon(one.type)">
                             </figure>
                         </div>
                         <div class="media-content">
@@ -69,38 +69,9 @@
 </style>
 
 <style scoped>
-    @font-face {
-        font-family: 'Material Icons';
-        font-style: normal;
-        font-weight: 400;
-        src: local('Material Icons'),
-        local('MaterialIcons-Regular'),
-        url(./fonts/MaterialIcons-Regular.ttf) format('truetype');
-    }
-
-    .material-icons {
-        font-family: 'Material Icons';
-        font-weight: normal;
-        font-style: normal;
-        font-size: 3rem;  /* Preferred icon size */
-        display: inline-block;
-        line-height: 1;
-        text-transform: none;
-        letter-spacing: normal;
-        word-wrap: normal;
-        white-space: nowrap;
-        direction: ltr;
-
-        /* Support for all WebKit browsers. */
-        -webkit-font-smoothing: antialiased;
-        /* Support for Safari and Chrome. */
-        text-rendering: optimizeLegibility;
-
-        /* Support for Firefox. */
-        -moz-osx-font-smoothing: grayscale;
-
-        /* Support for IE. */
-        font-feature-settings: 'liga';
+    .icon img {
+        height: 3rem;
+        filter:invert(100%);
     }
 
     /*animation*/
@@ -231,10 +202,11 @@ export default {
             return this.notif_group[index].show
         },
         closeNotif(index) {
-            this.notif_group[index].show = false
+            let item = this.notif_group[index]
+            item.show = false
 
-            if (typeof this.notif_group[index].onClose !== 'undefined' && typeof this.notif_group[index].onClose === 'function') {
-                this.notif_group[index].onClose()
+            if (typeof item.onClose !== 'undefined' && typeof item.onClose === 'function') {
+                item.onClose()
             }
         },
         classObj(type) {
@@ -242,18 +214,18 @@ export default {
         },
         getIcon(type) {
             switch (type) {
-            case 'primary':
-                return 'track_changes'
-            case 'success':
-                return 'check_circle'
-            case 'info':
-                return 'live_help'
-            case 'warning':
-                return 'power_settings_new'
-            case 'danger':
-                return 'add_alert'
-            default:
-                return 'error'
+                case 'primary':
+                    return require('./icons/baseline-track_changes-24px.svg')
+                case 'success':
+                    return require('./icons/baseline-check_circle-24px.svg')
+                case 'info':
+                    return require('./icons/baseline-live_help-24px.svg')
+                case 'warning':
+                    return require('./icons/baseline-power_settings_new-24px.svg')
+                case 'danger':
+                    return require('./icons/baseline-add_alert-24px.svg')
+                default:
+                    return require('./icons/baseline-error-24px.svg')
             }
         }
     }
