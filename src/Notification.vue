@@ -131,12 +131,12 @@
 export default {
     props: {
         title: {
-            type: string,
+            type: String,
             required: false,
             default: ''
         },
         body: {
-            type: string,
+            type: String,
             required: false,
             default: ''
         },
@@ -146,12 +146,12 @@ export default {
             default: true
         },
         type: {
-            type: string,
+            type: String,
             required: false,
             default: 'info'
         },
         duration: {
-            type: number,
+            type: Number,
             required: false,
             default: null
         },
