@@ -19,29 +19,35 @@ npm install vue-notif --save
     Vue.component('MyNotification', require('vue-notif'))
     ```
 
+- add the component to your page
+
+```html
+<div class="notif-container">
+    <my-notification></my-notification>
+</div>
+```
+
 - now call it either
 
     + from html
 
         ```html
-        // for example when the backend is redirecting back with a msg
         <div class="notif-container">
-            @if (session('status'))
-                <my-notification
-                    icon="false"
-                    title="title"
-                    body="body"
-                    type="success/error/primary/warning"
-                    duration="1/2/etc..">
-                </my-notification>
-            @endif
+            <my-notification
+                title="title"
+                body="body"
+                type="success/error/primary/warning"
+                :icon="false"
+                :duration="1/2/etc.."
+                :on-close="somefunction()">
+            </my-notification>
         </div>
         ```
 
     + or from js
 
         ```js
-        EventHub.fire('showNotif',{
+        EventHub.fire('showNotif', {
             title: 'title',
             body: 'body',
             type: 'success',
@@ -53,12 +59,13 @@ npm install vue-notif --save
         });
         ```
 
-        ```html
-        <div class="notif-container">
-            <my-notification></my-notification>
-        </div>
-        ```
+    |   prop   | required |   type   |             default             |
+    |----------|----------|----------|---------------------------------|
+    | title    | :x:      | string   | ''                              |
+    | body     | :x:      | string   | ''                              |
+    | type     | :x:      | string   | info                            |
+    | duration | :x:      | number   | null "card will remain visible" |
+    | icon     | :x:      | bool     | true                            |
+    | onClose  | :x:      | function | null                            |
 
-> - type : `default: info`
-> - duration : `default: null` if not present, card will remain visible
-> - icon : `default: true`
+- clicking the card itself will dismiss the notification as well.

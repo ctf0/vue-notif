@@ -2,8 +2,8 @@
     <div>
         <!-- single -->
         <transition v-if="self_show" name="slide-fade">
-            <div :class="classObj(self_type)" class="item" @click="self_show = false">
-                <button class="delete" @click="self_show = false"/>
+            <div :class="classObj(self_type)" class="item" @click="closeSelf()">
+                <button class="delete" @click="closeSelf()"/>
                 <div class="media">
                     <div v-if="self_icon" class="media-left">
                         <figure class="icon is-large">
@@ -130,11 +130,36 @@
 <script>
 export default {
     props: {
-        title: {default: ''},
-        body: {default: ''},
-        icon: {default: true},
-        type: {default: 'info'},
-        duration: {default: null}
+        title: {
+            type: string,
+            required: false,
+            default: ''
+        },
+        body: {
+            type: string,
+            required: false,
+            default: ''
+        },
+        icon: {
+            type: Boolean,
+            required: false,
+            default: true
+        },
+        type: {
+            type: string,
+            required: false,
+            default: 'info'
+        },
+        duration: {
+            type: number,
+            required: false,
+            default: null
+        },
+        onClose: {
+            type: Function,
+            required: false,
+            default: undefined
+        }
     },
 
     data() {
@@ -145,7 +170,8 @@ export default {
             self_type: this.type,
             self_icon: Boolean(this.icon),
             self_duration: this.duration,
-            self_show: false
+            self_show: false,
+            self_onClose: this.onClose
         }
     },
 
@@ -158,6 +184,27 @@ export default {
     },
 
     methods: {
+        // single
+        checkProp() {
+            if (this.self_title) {
+                this.self_show = true
+            }
+
+            if (this.self_duration != (undefined || null)) {
+                setTimeout(() => {
+                    this.closeSelf()
+                }, this.self_duration * 1000)
+            }
+        },
+        closeSelf() {
+            this.self_show = false
+
+            if (typeof this.self_onClose !== 'undefined' && typeof this.self_onClose === 'function') {
+                this.self_onClose()
+            }
+        },
+
+        // group
         checkForGroup() {
             return this.notif_group.length > 1 &&
                     this.notif_group.filter((item) => item.show == true).length > 1
@@ -167,17 +214,6 @@ export default {
                 item.show = false
                 item.duration = null
             })
-        },
-        checkProp() {
-            if (this.self_title) {
-                this.self_show = true
-            }
-
-            if (this.self_duration != (undefined || null)) {
-                setTimeout(() => {
-                    this.self_show = false
-                }, this.self_duration * 1000)
-            }
         },
         collectData(data) {
             this.notif_group.push({
@@ -209,6 +245,8 @@ export default {
                 item.onClose()
             }
         },
+
+        // helpers
         classObj(type) {
             return `notification has-shadow is-${type}`
         },
