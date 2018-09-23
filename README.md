@@ -59,13 +59,13 @@ npm install vue-notif --save
         });
         ```
 
-    |   prop   | required |   type   |             default             |
-    |----------|----------|----------|---------------------------------|
-    | title    | :x:      | string   | ''                              |
-    | body     | :x:      | string   | ''                              |
-    | type     | :x:      | string   | info                            |
-    | duration | :x:      | number   | null "card will remain visible" |
-    | icon     | :x:      | bool     | true                            |
-    | onClose  | :x:      | function | null                            |
+    |   prop   | required |   type   |                   default                   |
+    |----------|----------|----------|---------------------------------------------|
+    | title    | :x:      | string   | ''                                          |
+    | body     | :x:      | string   | ''                                          |
+    | type     | :x:      | string   | info                                        |
+    | duration | :x:      | number   | in seconds, null "card will remain visible" |
+    | icon     | :x:      | bool     | true                                        |
+    | onClose  | :x:      | function | null                                        |
 
 - clicking the card itself will dismiss the notification as well.
