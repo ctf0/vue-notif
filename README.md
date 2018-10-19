@@ -1,12 +1,16 @@
-# Vue Notif
-
-[![npm](https://img.shields.io/npm/v/vue-notif.svg?style=for-the-badge)](https://www.npmjs.com/package/vue-notif) [![npm](https://img.shields.io/npm/dt/vue-notif.svg?style=for-the-badge)](https://www.npmjs.com/package/vue-notif)
+<h1 align="center" style="border: none">
+    Vue Notif
+    <br>
+    <a href="https://www.npmjs.com/package/vue-notif"><img src="https://img.shields.io/npm/v/vue-notif.svg?style=for-the-badge" alt="npm" /></a> <a href="https://www.npmjs.com/package/vue-notif"><img src="https://img.shields.io/npm/dt/vue-notif.svg?style=for-the-badge" alt="npm" /></a>
+</h1>
 
 ## Installation
 
 ```bash
 npm install vue-notif --save
 ```
+
+<br>
 
 ## Usage
 
@@ -21,11 +25,11 @@ npm install vue-notif --save
 
 - add the component to your page
 
-```html
-<div class="notif-container">
-    <my-notification></my-notification>
-</div>
-```
+    ```html
+    <div class="notif-container">
+        <my-notification></my-notification>
+    </div>
+    ```
 
 - now call it either
 
