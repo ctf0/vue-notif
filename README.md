@@ -65,10 +65,10 @@ npm install vue-notif --save
 
     |   prop   | required |   type   |                   default                   |
     |----------|----------|----------|---------------------------------------------|
-    | title    | :x:      | string   | ''                                          |
-    | body     | :x:      | string   | ''                                          |
+    | title    | :x:      | string   | null                                        |
+    | body     | :x:      | string   | null                                        |
     | type     | :x:      | string   | info                                        |
-    | duration | :x:      | number   | in seconds, null "card will remain visible" |
+    | duration | :x:      | number   | in seconds / null "card will remain visible"|
     | icon     | :x:      | bool     | true                                        |
     | onClose  | :x:      | function | null                                        |
 
