@@ -32,7 +32,7 @@
             <transition-group name="slide-fade" tag="ul">
                 <li v-for="(one,index) in notif_group"
                     v-if="IsVisible(index)"
-                    :key="index"
+                    :key="`${one.type}_${index}`"
                     :class="classObj(one.type)"
                     class="item"
                     @click="closeNotif(index)">
