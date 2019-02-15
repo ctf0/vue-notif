@@ -20,7 +20,7 @@ npm install vue-notif --save
     window.Vue = require('vue')
     window.EventHub = require('vuemit')
 
-    Vue.component('MyNotification', require('vue-notif'))
+    Vue.component('MyNotification', require('vue-notif').default)
     ```
 
 - add the component to your page
