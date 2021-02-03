@@ -17,7 +17,7 @@ npm install vue-notif --save
 - register the component "we use ***Bulma*** for styling the notification cards".
 
     ```js
-    window.Vue = require('vue')
+    import Vue from 'vue'
     window.EventHub = require('vuemit')
 
     Vue.component('MyNotification', require('vue-notif').default)
@@ -63,13 +63,13 @@ npm install vue-notif --save
         });
         ```
 
-    |   prop   | required |   type   |                   default                   |
-    |----------|----------|----------|---------------------------------------------|
-    | title    | :x:      | string   | null                                        |
-    | body     | :x:      | string   | null                                        |
-    | type     | :x:      | string   | info                                        |
-    | duration | :x:      | number   | in seconds / null "card will remain visible"|
-    | icon     | :x:      | bool     | true                                        |
-    | onClose  | :x:      | function | null                                        |
+    | prop     | required | type     | default                                      |
+    | -------- | -------- | -------- | -------------------------------------------- |
+    | title    | :x:      | string   | null                                         |
+    | body     | :x:      | string   | null                                         |
+    | type     | :x:      | string   | info                                         |
+    | duration | :x:      | number   | in seconds / null "card will remain visible" |
+    | icon     | :x:      | bool     | true                                         |
+    | onClose  | :x:      | function | null                                         |
 
 - clicking the card itself will dismiss the notification as well.

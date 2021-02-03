@@ -14,7 +14,7 @@
         "vue": "^2.0.0"
     },
     "dependencies": {
-        "vuemit": "^1.0.0"
+        "vuemit": "^2.0.0"
     },
     "keywords": [
         "vue",
